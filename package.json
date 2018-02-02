@@ -1,0 +1,51 @@
+{
+  "name": "dropboxify",
+  "version": "1.0.0",
+  "main": "lib/dropboxify.js",
+  "description": "Read directory content from dropbox with file attributes",
+  "author": "",
+  "homepage": "http://github.com/coderaiser/dropboxify",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/dropboxify.git"
+  },
+  "scripts": {
+    "test": "tape 'test/*.js'",
+    "report": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc npm test",
+    "watch:coverage": "npm run watcher -- npm run coverage",
+    "watch:test": "npm run watcher -- npm test",
+    "watcher": "nodemon -w test -w lib --exec",
+    "lint": "redrun lint:*",
+    "lint:eslint:lib": "eslint lib",
+    "lint:eslint:test": "eslint -c .eslintrc.test test --no-eslintrc"
+  },
+  "dependencies": {
+    "currify": "^2.0.6",
+    "date-fns": "^1.15.0",
+    "dropbox": "^3.0.3",
+    "format-io": "^0.9.6",
+    "isomorphic-fetch": "^2.2.1",
+    "shortdate": "^1.2.0"
+  },
+  "devDependencies": {
+    "@cloudcmd/formatify": "^1.0.0",
+    "@cloudcmd/sortify": "^1.0.0",
+    "eslint": "^4.16.0",
+    "eslint-plugin-node": "^5.2.1",
+    "nodemon": "^1.14.11",
+    "nyc": "^11.4.1",
+    "sinon": "^4.2.2",
+    "sinon-called-with-diff": "^1.0.2",
+    "tape": "^4.6.3"
+  },
+  "keywords": [
+    "dropbox",
+    "directory",
+    "read",
+    "readdir",
+    "readify",
+    "cloudcmd"
+  ],
+  "license": "MIT"
+}
