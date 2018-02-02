@@ -26,7 +26,7 @@ npm i dropboxify --save
   - `sort` - sort by: name, size, date
   - `order` - "asc" or "desc" for ascending and descending order (default: "asc")
   - `type` - when "raw" returns not formatted result
-- **fn** - `function`
+- **fn** - `function` callback
 
 ## Examples
 
