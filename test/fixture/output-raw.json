@@ -1,14 +1,16 @@
-[{
-    "name": "english",
-    "size": "dir",
-    "date": 0,
-    "mode": "",
-    "owner": ""
-}, {
-    "name": "cloudcmd.png",
-    "size": 11544,
-    "date": 1377248899000,
-    "mode": "",
-    "owner": ""
-}]
-
+{
+    "path": "/",
+    "files": [{
+        "name": "english",
+        "size": "dir",
+        "date": 0,
+        "mode": "",
+        "owner": ""
+    }, {
+        "name": "cloudcmd.png",
+        "size": 11544,
+        "date": 1377248899000,
+        "mode": "",
+        "owner": ""
+    }]
+}

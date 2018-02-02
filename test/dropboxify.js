@@ -97,7 +97,7 @@ test('dropboxify: call: not root', (t) => {
 
 test('dropboxify: result', (t) => {
     const token = 'token';
-    const path = '/home';
+    const path = '/';
     const filesListFolder = sinon
         .stub()
         .returns(Promise.resolve({
@@ -123,7 +123,7 @@ test('dropboxify: result', (t) => {
 
 test('dropboxify: result: raw', (t) => {
     const token = 'token';
-    const path = '/home';
+    const path = '/';
     const filesListFolder = sinon
         .stub()
         .returns(Promise.resolve({
@@ -148,7 +148,7 @@ test('dropboxify: result: raw', (t) => {
 });
 
 test('dropboxify: error: wrong token', (t) => {
-    const path = '/home';
+    const path = '/';
     const msg = [
         'Error in call to API function "files/list_folder":',
         'Invalid authorization value in HTTP header "Authorization": "Bearer".',
@@ -185,7 +185,7 @@ test('dropboxify: error: wrong token', (t) => {
 });
 
 test('dropboxify: error: wrong dir', (t) => {
-    const path = '/home';
+    const path = '/';
     const error_summary = 'path/not_found/..';
     
     const error = Error(error_summary);
