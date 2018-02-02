@@ -21,6 +21,8 @@
     "lint:eslint:test": "eslint -c .eslintrc.test test --no-eslintrc"
   },
   "dependencies": {
+    "@cloudcmd/formatify": "^1.0.0",
+    "@cloudcmd/sortify": "^1.0.0",
     "currify": "^2.0.6",
     "date-fns": "^1.15.0",
     "dropbox": "^3.0.3",
@@ -29,8 +31,6 @@
     "shortdate": "^1.2.0"
   },
   "devDependencies": {
-    "@cloudcmd/formatify": "^1.0.0",
-    "@cloudcmd/sortify": "^1.0.0",
     "eslint": "^4.16.0",
     "eslint-plugin-node": "^5.2.1",
     "nodemon": "^1.14.11",
