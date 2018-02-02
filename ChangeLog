@@ -1,3 +1,11 @@
+2018.02.02, v1.0.2
+
+fix:
+- (dropboxify) result
+- (package) coveralls
+- (package) redrun v5.10.0
+
+
 2018.02.02, v1.0.1
 
 fix:
