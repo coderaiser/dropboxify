@@ -37,21 +37,23 @@ const token = 'token';
 const dir = '/';
 const type = 'raw';
 
-dropboxify(token, dir, {type, sort, order}, files);
-// output
-[{
-    name: 'dropboxify.js',
-    size: 4735,
-    date: 1377248899000,
-    owner: 0,
-    mode: 0
-}, {
-    name: 'readify.js',
-    size: 3735,
-    date: 1377248899000,
-    owner: 0,
-    mode: 0
-}]
+dropboxify(token, dir, {type, sort, order}, (e, files) => {
+    console.log(files);
+    // outputs
+    [{
+        name: 'dropboxify.js',
+        size: 4735,
+        date: 1377248899000,
+        owner: 0,
+        mode: 0
+    }, {
+        name: 'readify.js',
+        size: 3735,
+        date: 1377248899000,
+        owner: 0,
+        mode: 0
+    }];
+});
 ```
 
 ## Related
