@@ -2,11 +2,11 @@
 
 [NPMIMGURL]:                https://img.shields.io/npm/v/dropboxify.svg?style=flat
 [BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/dropboxify/master.svg?style=flat
-[DependencyStatusIMGURL]:   https://img.shields.io/gemnasium/coderaiser/dropboxify.svg?style=flat
+[DependencyStatusIMGURL]:   https://img.shields.io/david/coderaiser/dropboxify.svg?style=flat
 [LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
 [NPMURL]:                   https://npmjs.org/package/@coderaiser/dropboxify "npm"
 [BuildStatusURL]:           https://travis-ci.org/coderaiser/dropboxify  "Build Status"
-[DependencyStatusURL]:      https://gemnasium.com/coderaiser/dropboxify "Dependency Status"
+[DependencyStatusURL]:      https://david-dm.org/coderaiser/dropboxify "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
 
 Read directory content from dropbox compatible way with [readify](https://github.com/coderaiser/readify).
