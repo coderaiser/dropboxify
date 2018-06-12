@@ -1,6 +1,6 @@
 {
   "name": "dropboxify",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "lib/dropboxify.js",
   "description": "Read directory content from dropbox with file attributes",
   "author": "",
