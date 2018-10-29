@@ -35,7 +35,7 @@
     "eslint": "^5.8.0",
     "eslint-plugin-node": "^8.0.0",
     "nodemon": "^1.14.11",
-    "nyc": "^11.4.1",
+    "nyc": "^13.1.0",
     "redrun": "^7.0.2",
     "sinon": "^7.1.0",
     "sinon-called-with-diff": "^2.0.0",
