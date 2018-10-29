@@ -14,19 +14,18 @@ Read directory content from dropbox compatible way with [readify](https://github
 ## Install
 
 ```
-npm i dropboxify --save
+npm i dropboxify
 ```
 
 ## API
 
-### dropboxify(token, dir[, options], fn)
+### dropboxify(token, dir[, options])
 
 - **token** - `string` generated [access token](https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account/)
 - **options** - `object` can contain:
   - `sort` - sort by: name, size, date
   - `order` - "asc" or "desc" for ascending and descending order (default: "asc")
   - `type` - when "raw" returns not formatted result
-- **fn** - `function` callback
 
 ## Examples
 
@@ -37,26 +36,25 @@ const token = 'token';
 const dir = '/';
 const type = 'raw';
 
-dropboxify(token, dir, {type, sort, order}, (e, files) => {
-    console.log(files);
-    // outputs
-    {
-        path: "/",
-        files: [{
-            name: 'dropboxify.js',
-            size: 4735,
-            date: 1377248899000,
-            owner: 0,
-            mode: 0
-        }, {
-            name: 'readify.js',
-            size: 3735,
-            date: 1377248899000,
-            owner: 0,
-            mode: 0
-        }];
-    }
-});
+const files = await dropboxify(token, dir, {type, sort, order});
+console.log(files);
+// outputs
+{
+    path: "/",
+    files: [{
+        name: 'dropboxify.js',
+        size: 4735,
+        date: 1377248899000,
+        owner: 0,
+        mode: 0
+    }, {
+        name: 'readify.js',
+        size: 3735,
+        date: 1377248899000,
+        owner: 0,
+        mode: 0
+    }];
+}
 ```
 
 ## Related
