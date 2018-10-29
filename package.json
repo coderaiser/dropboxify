@@ -23,11 +23,11 @@
   "dependencies": {
     "@cloudcmd/formatify": "^1.0.0",
     "@cloudcmd/sortify": "^2.0.0",
+    "cross-fetch": "^2.2.3",
     "currify": "^3.0.0",
     "date-fns": "^1.15.0",
     "dropbox": "^4.0.0",
     "format-io": "^1.0.1",
-    "isomorphic-fetch": "^2.2.1",
     "shortdate": "^1.2.0"
   },
   "devDependencies": {
