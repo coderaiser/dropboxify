@@ -2,15 +2,17 @@
     "path": "/",
     "files": [{
         "name": "english",
-        "size": "dir",
+        "size": 0,
         "date": 0,
         "mode": "",
-        "owner": ""
+        "owner": "",
+        "type": "directory"
     }, {
         "name": "cloudcmd.png",
         "size": 11544,
         "date": 1377248899000,
         "mode": "",
-        "owner": ""
+        "owner": "",
+        "type": "file"
     }]
 }

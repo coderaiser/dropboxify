@@ -3,8 +3,10 @@
 const test = require('tape');
 const dropboxify = require('..');
 const diff = require('sinon-called-with-diff');
+const tryToCatch = require('try-to-catch');
 const sinon = diff(require('sinon'));
-const noop = sinon.stub();
+const mockRequire = require('mock-require');
+const {reRequire} = mockRequire;
 
 const fixture = {
     input: require('./fixture/input'),
@@ -12,90 +14,88 @@ const fixture = {
     outputRaw: require('./fixture/output-raw'),
 };
 
-test('dropboxify: no accessToken', (t) => {
-    t.throws(dropboxify, /accessToken should be a string!/, 'should throw when no accessToken');
-    t.end();
-});
-
-test('dropboxify: no dir', (t) => {
-    const fn = () => dropboxify('');
+test('dropboxify: no accessToken', async (t) => {
+    const [e] = await tryToCatch(dropboxify);
     
-    t.throws(fn, /dir should be a string!/, 'should throw when no dir');
+    t.equal(e.message, 'accessToken should be a string!', 'should throw when no accessToken');
     t.end();
 });
 
-test('dropboxify: no fn', (t) => {
-    const fn = () => dropboxify('', '');
+test('dropboxify: no dir', async (t) => {
+    const [e] = await tryToCatch(dropboxify, '');
     
-    t.throws(fn, /fn should be a function!/, 'should throw when no fn');
+    t.equal(e.message, 'dir should be a string!', 'should throw when no dir');
     t.end();
 });
 
-test('dropboxify: options: wrong type', (t) => {
-    const fn = () => dropboxify('token', '/', {type: 1}, noop);
-    t.throws(fn, /type should be a string or not to be defined!/, 'should when type not string');
+test('dropboxify: options: wrong type', async (t) => {
+    const [e] = await tryToCatch(dropboxify, 'token', '/', {type: 1});
+    
+    t.equal(e.message, 'type should be a string or not to be defined!', 'should when type not string');
     t.end();
 });
 
-test('dropboxify: options: wrong sort', (t) => {
-    const fn = () => dropboxify('token', '/', {sort: 1}, noop);
-    t.throws(fn, /sort should be a string!/, 'should when sort not string');
+test('dropboxify: options: wrong sort', async (t) => {
+    const [e] = await tryToCatch(dropboxify, 'token', '/', {sort: 1});
+    
+    t.equal(e.message, 'sort should be a string!', 'should when sort not string');
     t.end();
 });
 
-test('dropboxify: options: wrong sort', (t) => {
-    const fn = () => dropboxify('token', '/', {order: 1}, noop);
-    t.throws(fn, /order can be "asc" or "desc" only!/, 'should when sort not string');
+test('dropboxify: options: wrong sort', async (t) => {
+    const [e] = await tryToCatch(dropboxify, 'token', '/', {order: 1});
+    
+    t.equal(e.message, 'order can be "asc" or "desc" only!', 'should when sort not string');
     t.end();
 });
 
-test('dropboxify: call: root', (t) => {
+test('dropboxify: call: root', async (t) => {
     const path = '/';
     const filesListFolder = sinon
         .stub()
-        .returns(Promise.resolve());
+        .returns(Promise.resolve({
+            entries: fixture.input
+        }));
     
     const Dropbox = function() {
         this.filesListFolder = filesListFolder;
     };
     
-    clean('..');
-    
-    stub('dropbox', {
+    mockRequire('dropbox', {
         Dropbox
     });
     
-    const dropboxify = require('..');
-    dropboxify('token', path, sinon.stub());
+    const dropboxify = reRequire('..');
+    await dropboxify('token', path);
     
     t.ok(filesListFolder.calledWith({path: ''}), 'should call with empty path');
     t.end();
 });
 
-test('dropboxify: call: not root', (t) => {
+test('dropboxify: call: not root', async (t) => {
     const path = '/home';
     const filesListFolder = sinon
         .stub()
-        .returns(Promise.resolve());
+        .returns(Promise.resolve({
+            entries: fixture.input,
+        }));
     
     const Dropbox = function() {
         this.filesListFolder = filesListFolder;
     };
     
-    clean('..');
-    
-    stub('dropbox', {
+    mockRequire('dropbox', {
         Dropbox
     });
     
-    const dropboxify = require('..');
-    dropboxify('token', path, sinon.stub());
+    const dropboxify = reRequire('..');
+    await dropboxify('token', path);
     
     t.ok(filesListFolder.calledWith({path}), 'should call with empty path');
     t.end();
 });
 
-test('dropboxify: result', (t) => {
+test('dropboxify: result', async (t) => {
     const token = 'token';
     const path = '/';
     const filesListFolder = sinon
@@ -108,20 +108,18 @@ test('dropboxify: result', (t) => {
         this.filesListFolder = filesListFolder;
     };
     
-    clean('..');
-    
-    stub('dropbox', {
+    mockRequire('dropbox', {
         Dropbox
     });
     
-    const dropboxify = require('..');
-    dropboxify(token, path, (e, result) => {
-        t.deepEqual(result, fixture.output, 'should equal');
-        t.end();
-    });
+    const dropboxify = reRequire('..');
+    const result = await dropboxify(token, path);
+    
+    t.deepEqual(result, fixture.output, 'should equal');
+    t.end();
 });
 
-test('dropboxify: result: raw', (t) => {
+test('dropboxify: result: raw', async (t) => {
     const token = 'token';
     const path = '/';
     const filesListFolder = sinon
@@ -134,20 +132,18 @@ test('dropboxify: result: raw', (t) => {
         this.filesListFolder = filesListFolder;
     };
     
-    clean('..');
-    
-    stub('dropbox', {
+    mockRequire('dropbox', {
         Dropbox
     });
     
-    const dropboxify = require('..');
-    dropboxify(token, path, {type: 'raw'}, (e, result) => {
-        t.deepEqual(result, fixture.outputRaw, 'should equal');
-        t.end();
-    });
+    const dropboxify = reRequire('..');
+    const result = await dropboxify(token, path, {type: 'raw'});
+    
+    t.deepEqual(result, fixture.outputRaw, 'should equal');
+    t.end();
 });
 
-test('dropboxify: error: wrong token', (t) => {
+test('dropboxify: error: wrong token', async (t) => {
     const path = '/';
     const msg = [
         'Error in call to API function "files/list_folder":',
@@ -171,20 +167,18 @@ test('dropboxify: error: wrong token', (t) => {
         this.filesListFolder = filesListFolder;
     };
     
-    clean('..');
-    
-    stub('dropbox', {
+    mockRequire('dropbox', {
         Dropbox
     });
     
-    const dropboxify = require('..');
-    dropboxify('token', path, (e) => {
-        t.deepEqual(e, error, 'should reject');
-        t.end();
-    });
+    const dropboxify = reRequire('..');
+    const [e] = await tryToCatch(dropboxify, 'token', path);
+    
+    t.deepEqual(e, error, 'should reject');
+    t.end();
 });
 
-test('dropboxify: error: wrong dir', (t) => {
+test('dropboxify: error: wrong dir', async (t) => {
     const path = '/';
     const error_summary = 'path/not_found/..';
     
@@ -205,24 +199,14 @@ test('dropboxify: error: wrong dir', (t) => {
         this.filesListFolder = filesListFolder;
     };
     
-    clean('..');
-    
-    stub('dropbox', {
+    mockRequire('dropbox', {
         Dropbox
     });
     
-    const dropboxify = require('..');
-    dropboxify('token', path, (e) => {
-        t.deepEqual(e, error, 'should reject');
-        t.end();
-    });
+    const dropboxify = reRequire('..');
+    const [e] = await tryToCatch(dropboxify, 'token', path);
+    
+    t.deepEqual(e, error, 'should reject');
+    t.end();
 });
-
-function clean(path) {
-    delete require.cache[require.resolve(path)];
-}
-
-function stub(name, fn) {
-    require.cache[require.resolve(name)].exports = fn;
-}
 
