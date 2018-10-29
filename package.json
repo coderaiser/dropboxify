@@ -49,5 +49,8 @@
     "readify",
     "cloudcmd"
   ],
+  "engines": {
+    "node": ">=8"
+  },
   "license": "MIT"
 }
