@@ -1,3 +1,18 @@
+2018.10.29, v2.0.0
+
+feature:
+- (dropboxify) es2018-ify
+- (dropboxify) callback -> promise
+- (package) nyc v13.1.0
+- (package) eslint-plugin-node v8.0.0
+- (package) eslint v5.8.0
+- (package) @cloudcmd/sortify v2.0.0
+- (package) redrun v7.0.2
+- (package) sinon v7.1.0
+- (package) currify v3.0.0
+- (package) drop support of node < 8
+
+
 2018.06.12, v1.0.5
 
 feature:
