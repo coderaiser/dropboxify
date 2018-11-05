@@ -1,3 +1,10 @@
+2018.11.05, v2.0.2
+
+feature:
+- (package) sinon-called-with-diff v3.0.0
+- (package) cross-fetch -> node-fetch
+
+
 2018.10.29, v2.0.1
 
 feature:
