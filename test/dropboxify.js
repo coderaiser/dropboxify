@@ -2,9 +2,8 @@
 
 const test = require('tape');
 const dropboxify = require('..');
-const diff = require('sinon-called-with-diff');
 const tryToCatch = require('try-to-catch');
-const sinon = diff(require('sinon'));
+const stub = require('@cloudcmd/stub');
 const mockRequire = require('mock-require');
 const {reRequire} = mockRequire;
 
@@ -51,8 +50,7 @@ test('dropboxify: options: wrong sort', async (t) => {
 
 test('dropboxify: call: root', async (t) => {
     const path = '/';
-    const filesListFolder = sinon
-        .stub()
+    const filesListFolder = stub()
         .returns(Promise.resolve({
             entries: fixture.input
         }));
@@ -74,8 +72,7 @@ test('dropboxify: call: root', async (t) => {
 
 test('dropboxify: call: not root', async (t) => {
     const path = '/home';
-    const filesListFolder = sinon
-        .stub()
+    const filesListFolder = stub()
         .returns(Promise.resolve({
             entries: fixture.input,
         }));
@@ -98,8 +95,7 @@ test('dropboxify: call: not root', async (t) => {
 test('dropboxify: result', async (t) => {
     const token = 'token';
     const path = '/';
-    const filesListFolder = sinon
-        .stub()
+    const filesListFolder = stub()
         .returns(Promise.resolve({
             entries: fixture.input
         }));
@@ -122,8 +118,7 @@ test('dropboxify: result', async (t) => {
 test('dropboxify: result: raw', async (t) => {
     const token = 'token';
     const path = '/';
-    const filesListFolder = sinon
-        .stub()
+    const filesListFolder = stub()
         .returns(Promise.resolve({
             entries: fixture.input
         }));
@@ -159,8 +154,7 @@ test('dropboxify: error: wrong token', async (t) => {
         });
     });
     
-    const filesListFolder = sinon
-        .stub()
+    const filesListFolder = stub()
         .returns(promise);
     
     const Dropbox = function() {
@@ -191,8 +185,7 @@ test('dropboxify: error: wrong dir', async (t) => {
         });
     });
     
-    const filesListFolder = sinon
-        .stub()
+    const filesListFolder = stub()
         .returns(promise);
     
     const Dropbox = function() {
