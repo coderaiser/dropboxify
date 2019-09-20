@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('tape');
+const test = require('supertape');
 const dropboxify = require('..');
 const tryToCatch = require('try-to-catch');
 const stub = require('@cloudcmd/stub');
@@ -52,7 +52,7 @@ test('dropboxify: call: root', async (t) => {
     const path = '/';
     const filesListFolder = stub()
         .returns(Promise.resolve({
-            entries: fixture.input
+            entries: fixture.input,
         }));
     
     const Dropbox = function() {
@@ -60,7 +60,7 @@ test('dropboxify: call: root', async (t) => {
     };
     
     mockRequire('dropbox', {
-        Dropbox
+        Dropbox,
     });
     
     const dropboxify = reRequire('..');
@@ -82,7 +82,7 @@ test('dropboxify: call: not root', async (t) => {
     };
     
     mockRequire('dropbox', {
-        Dropbox
+        Dropbox,
     });
     
     const dropboxify = reRequire('..');
@@ -97,7 +97,7 @@ test('dropboxify: result', async (t) => {
     const path = '/';
     const filesListFolder = stub()
         .returns(Promise.resolve({
-            entries: fixture.input
+            entries: fixture.input,
         }));
     
     const Dropbox = function() {
@@ -105,7 +105,7 @@ test('dropboxify: result', async (t) => {
     };
     
     mockRequire('dropbox', {
-        Dropbox
+        Dropbox,
     });
     
     const dropboxify = reRequire('..');
@@ -120,7 +120,7 @@ test('dropboxify: result: raw', async (t) => {
     const path = '/';
     const filesListFolder = stub()
         .returns(Promise.resolve({
-            entries: fixture.input
+            entries: fixture.input,
         }));
     
     const Dropbox = function() {
@@ -128,7 +128,7 @@ test('dropboxify: result: raw', async (t) => {
     };
     
     mockRequire('dropbox', {
-        Dropbox
+        Dropbox,
     });
     
     const dropboxify = reRequire('..');
@@ -150,7 +150,7 @@ test('dropboxify: error: wrong token', async (t) => {
     
     const promise = new Promise((resolve, reject) => {
         reject({
-            error: msg
+            error: msg,
         });
     });
     
@@ -162,7 +162,7 @@ test('dropboxify: error: wrong token', async (t) => {
     };
     
     mockRequire('dropbox', {
-        Dropbox
+        Dropbox,
     });
     
     const dropboxify = reRequire('..');
@@ -180,8 +180,8 @@ test('dropboxify: error: wrong dir', async (t) => {
     const promise = new Promise((resolve, reject) => {
         reject({
             error: {
-                error_summary
-            }
+                error_summary,
+            },
         });
     });
     
@@ -193,7 +193,7 @@ test('dropboxify: error: wrong dir', async (t) => {
     };
     
     mockRequire('dropbox', {
-        Dropbox
+        Dropbox,
     });
     
     const dropboxify = reRequire('..');
