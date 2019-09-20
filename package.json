@@ -33,13 +33,10 @@
   "devDependencies": {
     "@cloudcmd/stub": "^2.1.2",
     "coveralls": "^3.0.0",
-    "eslint": "^5.8.0",
-    "eslint-plugin-node": "^8.0.0",
+    "eslint": "^6.4.0",
     "mock-require": "^3.0.2",
     "nodemon": "^1.14.11",
     "nyc": "^13.1.0",
-    "redrun": "^7.0.2",
-    "tape": "^4.6.3",
     "try-to-catch": "^1.0.2"
   },
   "keywords": [
