@@ -26,7 +26,7 @@
     "currify": "^4.0.0",
     "date-fns": "^1.15.0",
     "dropbox": "^4.0.0",
-    "format-io": "^1.0.1",
+    "format-io": "^2.0.0",
     "node-fetch": "^2.2.0",
     "shortdate": "^1.2.0"
   },
