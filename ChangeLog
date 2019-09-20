@@ -1,3 +1,15 @@
+2019.09.20, v2.0.3
+
+feature:
+- (dropboxify) madrun
+- (package) date-fns v2.2.1
+- (package) nyc v14.1.1
+- (package) eslint v6.4.0
+- (package) format-io v2.0.0
+- (package) currify v4.0.0
+- (package) sinon, sinon-called-with-diff -> @cloudcmd/stub
+
+
 2018.11.05, v2.0.2
 
 feature:
