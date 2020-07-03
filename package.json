@@ -43,7 +43,7 @@
     "nyc": "^15.0.0",
     "putout": "^9.1.0",
     "supertape": "^1.2.3",
-    "try-to-catch": "^2.0.0"
+    "try-to-catch": "^3.0.0"
   },
   "keywords": [
     "dropbox",
