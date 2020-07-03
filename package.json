@@ -32,7 +32,7 @@
     "shortdate": "^2.0.0"
   },
   "devDependencies": {
-    "@cloudcmd/stub": "^2.1.2",
+    "@cloudcmd/stub": "^3.1.0",
     "coveralls": "^3.0.0",
     "eslint": "^7.3.1",
     "eslint-plugin-node": "^11.0.0",
