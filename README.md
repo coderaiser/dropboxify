@@ -1,13 +1,13 @@
 # Dropboxify [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Coverage Status][CoverageIMGURL]][CoverageURL]
 
 [NPMIMGURL]:                https://img.shields.io/npm/v/dropboxify.svg?style=flat
-[BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/dropboxify/master.svg?style=flat
 [DependencyStatusIMGURL]:   https://img.shields.io/david/coderaiser/dropboxify.svg?style=flat
 [LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
 [NPMURL]:                   https://npmjs.org/package/@coderaiser/dropboxify "npm"
-[BuildStatusURL]:           https://travis-ci.org/coderaiser/dropboxify  "Build Status"
 [DependencyStatusURL]:      https://david-dm.org/coderaiser/dropboxify "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
+[BuildStatusURL]: https://github.com/coderaiser/dropboxify/actions?query=workflow%3A%22Node+CI%22 "Build Status"
+[BuildStatusIMGURL]: https://github.com/coderaiser/dropboxify/workflows/Node%20CI/badge.svg
 
 Read directory content from dropbox compatible way with [readify](https://github.com/coderaiser/readify).
 
