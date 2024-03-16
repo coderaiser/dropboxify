@@ -1,6 +1,6 @@
 {
   "name": "dropboxify",
-  "version": "2.0.6",
+  "version": "3.0.0",
   "main": "lib/dropboxify.js",
   "description": "Read directory content from dropbox with file attributes",
   "author": "",
@@ -31,7 +31,7 @@
     "shortdate": "^2.0.0"
   },
   "devDependencies": {
-    "@types/node-fetch":"^2.5.7",
+    "@types/node-fetch": "^2.5.7",
     "eslint": "^8.57.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-putout": "^22.4.1",

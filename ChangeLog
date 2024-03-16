@@ -1,3 +1,18 @@
+2024.03.16, v3.0.0
+
+feature:
+- 3fd1d5f dropboxify: drop support of node < 18
+- f10b7af dropboxify: @types/node-fetch@^2.5.7 vundefined
+- 38742ae dropboxify: get rid of node-fetch
+- 134f366 dropboxify: putout v35.7.4
+- 61f5e6c dropboxify: date-fns v3.5.0
+- 6d6a378 dropboxify: dropbox v10.34.0
+- 0e4ead0 dropboxify: nodemon v3.1.0
+- 178d94f dropboxify: eslint v8.57.0
+- d0ae475 dropboxify: eslint-plugin-putout v22.4.1
+- 0576f59 dropboxify: supertape v10.4.0
+- 5799926 dropboxify: madrun v10.0.1
+
 2020.07.03, v2.0.6
 
 feature:
