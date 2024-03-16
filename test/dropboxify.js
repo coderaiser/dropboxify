@@ -41,7 +41,7 @@ test('dropboxify: options: wrong sort', async (t) => {
     t.end();
 });
 
-test('dropboxify: options: wrong sort', async (t) => {
+test('dropboxify: options: wrong order', async (t) => {
     const [e] = await tryToCatch(dropboxify, 'token', '/', {order: 1});
     
     t.equal(e.message, 'order can be "asc" or "desc" only!', 'should when sort not string');

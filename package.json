@@ -9,12 +9,6 @@
     "type": "git",
     "url": "git://github.com/coderaiser/dropboxify.git"
   },
-  "nyc": {
-    "exclude": [
-      "test",
-      ".*.js"
-    ]
-  },
   "scripts": {
     "test": "madrun test",
     "report": "madrun report",
@@ -34,7 +28,6 @@
     "date-fns": "^3.5.0",
     "dropbox": "^10.34.0",
     "format-io": "^2.0.0",
-    "node-fetch": "^2.2.0",
     "shortdate": "^2.0.0"
   },
   "devDependencies": {
