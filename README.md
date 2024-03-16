@@ -1,11 +1,9 @@
-# Dropboxify [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Coverage Status][CoverageIMGURL]][CoverageURL]
+# Dropboxify [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Coverage Status][CoverageIMGURL]][CoverageURL]
 
-[NPMIMGURL]:                https://img.shields.io/npm/v/dropboxify.svg?style=flat
-[DependencyStatusIMGURL]:   https://img.shields.io/david/coderaiser/dropboxify.svg?style=flat
-[LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
-[NPMURL]:                   https://npmjs.org/package/@coderaiser/dropboxify "npm"
-[DependencyStatusURL]:      https://david-dm.org/coderaiser/dropboxify "Dependency Status"
-[LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
+[NPMIMGURL]: https://img.shields.io/npm/v/dropboxify.svg?style=flat
+[LicenseIMGURL]: https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
+[NPMURL]: https://npmjs.org/package/@coderaiser/dropboxify "npm"
+[LicenseURL]: https://tldrlegal.com/license/mit-license "MIT License"
 [BuildStatusURL]: https://github.com/coderaiser/dropboxify/actions?query=workflow%3A%22Node+CI%22 "Build Status"
 [BuildStatusIMGURL]: https://github.com/coderaiser/dropboxify/workflows/Node%20CI/badge.svg
 
@@ -36,25 +34,29 @@ const token = 'token';
 const dir = '/';
 const type = 'raw';
 
-const files = await dropboxify(token, dir, {type, sort, order});
+const files = await dropboxify(token, dir, {
+    type,
+    sort,
+    order,
+});
 console.log(files);
 // outputs
-{
-    path: "/",
+({
+    path: '/',
     files: [{
         name: 'dropboxify.js',
         size: 4735,
-        date: 1377248899000,
+        date: 1_377_248_899_000,
         owner: 0,
-        mode: 0
+        mode: 0,
     }, {
         name: 'readify.js',
         size: 3735,
-        date: 1377248899000,
+        date: 1_377_248_899_000,
         owner: 0,
-        mode: 0
-    }];
-}
+        mode: 0,
+    }],
+});
 ```
 
 ## Related
@@ -66,6 +68,5 @@ console.log(files);
 
 MIT
 
-[CoverageURL]:              https://coveralls.io/github/coderaiser/dropboxify?branch=master
-[CoverageIMGURL]:           https://coveralls.io/repos/coderaiser/dropboxify/badge.svg?branch=master&service=github
-
+[CoverageURL]: https://coveralls.io/github/coderaiser/dropboxify?branch=master
+[CoverageIMGURL]: https://coveralls.io/repos/coderaiser/dropboxify/badge.svg?branch=master&service=github

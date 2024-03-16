@@ -1,11 +1,11 @@
 'use strict';
 
-const test = require('supertape');
+const mockRequire = require('mock-require');
+
+const {test, stub} = require('supertape');
 const dropboxify = require('..');
 const tryToCatch = require('try-to-catch');
-const stub = require('@cloudcmd/stub');
-const mockRequire = require('mock-require');
-const {reRequire} = mockRequire;
+const {stopAll, reRequire} = mockRequire;
 
 const fixture = {
     input: require('./fixture/input'),
@@ -28,21 +28,27 @@ test('dropboxify: no dir', async (t) => {
 });
 
 test('dropboxify: options: wrong type', async (t) => {
-    const [e] = await tryToCatch(dropboxify, 'token', '/', {type: 1});
+    const [e] = await tryToCatch(dropboxify, 'token', '/', {
+        type: 1,
+    });
     
     t.equal(e.message, 'type should be a string or not to be defined!', 'should when type not string');
     t.end();
 });
 
 test('dropboxify: options: wrong sort', async (t) => {
-    const [e] = await tryToCatch(dropboxify, 'token', '/', {sort: 1});
+    const [e] = await tryToCatch(dropboxify, 'token', '/', {
+        sort: 1,
+    });
     
     t.equal(e.message, 'sort should be a string!', 'should when sort not string');
     t.end();
 });
 
 test('dropboxify: options: wrong order', async (t) => {
-    const [e] = await tryToCatch(dropboxify, 'token', '/', {order: 1});
+    const [e] = await tryToCatch(dropboxify, 'token', '/', {
+        order: 1,
+    });
     
     t.equal(e.message, 'order can be "asc" or "desc" only!', 'should when sort not string');
     t.end();
@@ -50,10 +56,9 @@ test('dropboxify: options: wrong order', async (t) => {
 
 test('dropboxify: call: root', async (t) => {
     const path = '/';
-    const filesListFolder = stub()
-        .returns(Promise.resolve({
-            entries: fixture.input,
-        }));
+    const filesListFolder = stub().returns(Promise.resolve({
+        entries: fixture.input,
+    }));
     
     const Dropbox = function() {
         this.filesListFolder = filesListFolder;
@@ -65,17 +70,18 @@ test('dropboxify: call: root', async (t) => {
     
     const dropboxify = reRequire('..');
     await dropboxify('token', path);
-    
-    t.ok(filesListFolder.calledWith({path: ''}), 'should call with empty path');
+    stopAll();
+    t.calledWith(filesListFolder, [{
+        path: '',
+    }], 'should call with empty path');
     t.end();
 });
 
 test('dropboxify: call: not root', async (t) => {
     const path = '/home';
-    const filesListFolder = stub()
-        .returns(Promise.resolve({
-            entries: fixture.input,
-        }));
+    const filesListFolder = stub().returns(Promise.resolve({
+        entries: fixture.input,
+    }));
     
     const Dropbox = function() {
         this.filesListFolder = filesListFolder;
@@ -87,18 +93,19 @@ test('dropboxify: call: not root', async (t) => {
     
     const dropboxify = reRequire('..');
     await dropboxify('token', path);
-    
-    t.ok(filesListFolder.calledWith({path}), 'should call with empty path');
+    stopAll();
+    t.calledWith(filesListFolder, [{
+        path,
+    }], 'should call with empty path');
     t.end();
 });
 
 test('dropboxify: result', async (t) => {
     const token = 'token';
     const path = '/';
-    const filesListFolder = stub()
-        .returns(Promise.resolve({
-            entries: fixture.input,
-        }));
+    const filesListFolder = stub().returns(Promise.resolve({
+        entries: fixture.input,
+    }));
     
     const Dropbox = function() {
         this.filesListFolder = filesListFolder;
@@ -111,17 +118,18 @@ test('dropboxify: result', async (t) => {
     const dropboxify = reRequire('..');
     const result = await dropboxify(token, path);
     
-    t.deepEqual(result, fixture.output, 'should equal');
+    stopAll();
+    
+    t.deepEqual(result, fixture.output);
     t.end();
 });
 
 test('dropboxify: result: raw', async (t) => {
     const token = 'token';
     const path = '/';
-    const filesListFolder = stub()
-        .returns(Promise.resolve({
-            entries: fixture.input,
-        }));
+    const filesListFolder = stub().returns(Promise.resolve({
+        entries: fixture.input,
+    }));
     
     const Dropbox = function() {
         this.filesListFolder = filesListFolder;
@@ -132,9 +140,14 @@ test('dropboxify: result: raw', async (t) => {
     });
     
     const dropboxify = reRequire('..');
-    const result = await dropboxify(token, path, {type: 'raw'});
     
-    t.deepEqual(result, fixture.outputRaw, 'should equal');
+    const result = await dropboxify(token, path, {
+        type: 'raw',
+    });
+    
+    stopAll();
+    
+    t.deepEqual(result, fixture.outputRaw);
     t.end();
 });
 
@@ -154,8 +167,7 @@ test('dropboxify: error: wrong token', async (t) => {
         });
     });
     
-    const filesListFolder = stub()
-        .returns(promise);
+    const filesListFolder = stub().returns(promise);
     
     const Dropbox = function() {
         this.filesListFolder = filesListFolder;
@@ -167,6 +179,8 @@ test('dropboxify: error: wrong token', async (t) => {
     
     const dropboxify = reRequire('..');
     const [e] = await tryToCatch(dropboxify, 'token', path);
+    
+    stopAll();
     
     t.deepEqual(e, error, 'should reject');
     t.end();
@@ -185,8 +199,7 @@ test('dropboxify: error: wrong dir', async (t) => {
         });
     });
     
-    const filesListFolder = stub()
-        .returns(promise);
+    const filesListFolder = stub().returns(promise);
     
     const Dropbox = function() {
         this.filesListFolder = filesListFolder;
@@ -199,7 +212,8 @@ test('dropboxify: error: wrong dir', async (t) => {
     const dropboxify = reRequire('..');
     const [e] = await tryToCatch(dropboxify, 'token', path);
     
+    stopAll();
+    
     t.deepEqual(e, error, 'should reject');
     t.end();
 });
-
