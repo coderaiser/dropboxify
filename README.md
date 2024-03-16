@@ -39,6 +39,7 @@ const files = await dropboxify(token, dir, {
     sort,
     order,
 });
+
 console.log(files);
 // outputs
 ({
