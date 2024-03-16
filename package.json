@@ -38,9 +38,7 @@
     "shortdate": "^2.0.0"
   },
   "devDependencies": {
-    "@cloudcmd/stub": "^3.1.0",
-    "coveralls": "^3.0.0",
-    "eslint": "^7.3.1",
+    "eslint": "^8.57.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-putout": "^22.4.1",
     "madrun": "^10.0.1",
