@@ -1,3 +1,8 @@
+2024.03.16, v3.0.1
+
+feature:
+- 36998b6 dropboxify: add fetch wrapper
+
 2024.03.16, v3.0.0
 
 feature:
