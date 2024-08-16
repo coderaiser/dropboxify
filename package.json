@@ -23,7 +23,7 @@
     "lint:eslint:test": "madrun lint:eslint:test"
   },
   "dependencies": {
-    "@cloudcmd/formatify": "^1.0.0",
+    "@cloudcmd/formatify": "^2.0.1",
     "@cloudcmd/sortify": "^2.0.0",
     "currify": "^4.0.0",
     "date-fns": "^3.5.0",
