@@ -18,9 +18,7 @@
     "watch:test": "madrun watch:test",
     "watcher": "madrun watcher",
     "lint": "madrun lint",
-    "fix:lint": "madrun fix:lint",
-    "lint:eslint:lib": "madrun lint:eslint:lib",
-    "lint:eslint:test": "madrun lint:eslint:test"
+    "fix:lint": "madrun fix:lint"
   },
   "dependencies": {
     "@cloudcmd/formatify": "^3.1.0",
