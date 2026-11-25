@@ -1,13 +1,9 @@
-'use strict';
+import {createRequire} from 'node:module';
+import {test, stub} from 'supertape';
+import {tryToCatch} from 'try-to-catch';
+import {dropboxify} from '../lib/dropboxify.js';
 
-const mockRequire = require('mock-require');
-
-const {test, stub} = require('supertape');
-
-const {tryToCatch} = require('try-to-catch');
-const dropboxify = require('..');
-
-const {stopAll, reRequire} = mockRequire;
+const require = createRequire(import.meta.url);
 
 const fixture = {
     input: require('./fixture/input'),
@@ -66,16 +62,14 @@ test('dropboxify: call: root', async (t) => {
         this.filesListFolder = filesListFolder;
     };
     
-    mockRequire('dropbox', {
+    await dropboxify('token', path, {
         Dropbox,
     });
-    
-    const dropboxify = reRequire('..');
-    await dropboxify('token', path);
-    stopAll();
-    t.calledWith(filesListFolder, [{
+    const args = [{
         path: '',
-    }], 'should call with empty path');
+    }];
+    
+    t.calledWith(filesListFolder, args);
     t.end();
 });
 
@@ -89,16 +83,14 @@ test('dropboxify: call: not root', async (t) => {
         this.filesListFolder = filesListFolder;
     };
     
-    mockRequire('dropbox', {
+    await dropboxify('token', path, {
         Dropbox,
     });
-    
-    const dropboxify = reRequire('..');
-    await dropboxify('token', path);
-    stopAll();
-    t.calledWith(filesListFolder, [{
+    const args = [{
         path,
-    }], 'should call with empty path');
+    }];
+    
+    t.calledWith(filesListFolder, args);
     t.end();
 });
 
@@ -114,16 +106,24 @@ test('dropboxify: result', async (t) => {
         this.filesListFolder = filesListFolder;
     };
     
-    mockRequire('dropbox', {
+    const result = await dropboxify(token, path, {
         Dropbox,
     });
     
-    const dropboxify = reRequire('..');
-    const result = await dropboxify(token, path);
+    const [directory, file] = fixture.output.files;
+    const time = getTime(fixture.input[1].server_modified);
     
-    stopAll();
+    const expected = {
+        ...fixture.output,
+        files: [
+            directory, {
+                ...file,
+                time,
+            },
+        ],
+    };
     
-    t.deepEqual(result, fixture.output);
+    t.deepEqual(result, expected);
     t.end();
 });
 
@@ -139,17 +139,10 @@ test('dropboxify: result: raw', async (t) => {
         this.filesListFolder = filesListFolder;
     };
     
-    mockRequire('dropbox', {
-        Dropbox,
-    });
-    
-    const dropboxify = reRequire('..');
-    
     const result = await dropboxify(token, path, {
         type: 'raw',
+        Dropbox,
     });
-    
-    stopAll();
     
     t.deepEqual(result, fixture.outputRaw);
     t.end();
@@ -177,14 +170,9 @@ test('dropboxify: error: wrong token', async (t) => {
         this.filesListFolder = filesListFolder;
     };
     
-    mockRequire('dropbox', {
+    const [e] = await tryToCatch(dropboxify, 'token', path, {
         Dropbox,
     });
-    
-    const dropboxify = reRequire('..');
-    const [e] = await tryToCatch(dropboxify, 'token', path);
-    
-    stopAll();
     
     t.deepEqual(e, error, 'should reject');
     t.end();
@@ -209,15 +197,139 @@ test('dropboxify: error: wrong dir', async (t) => {
         this.filesListFolder = filesListFolder;
     };
     
-    mockRequire('dropbox', {
+    const [e] = await tryToCatch(dropboxify, 'token', path, {
         Dropbox,
     });
     
-    const dropboxify = reRequire('..');
-    const [e] = await tryToCatch(dropboxify, 'token', path);
-    
-    stopAll();
-    
     t.deepEqual(e, error, 'should reject');
+    t.end();
+});
+
+test('dropboxify: sort: time', async (t) => {
+    const Dropbox = getDropbox();
+    
+    const {files} = await dropboxify('token', '/', {
+        sort: 'time',
+        Dropbox,
+    });
+    
+    const result = [];
+    
+    for (const {name} of files) {
+        result.push(name);
+    }
+    
+    const expected = [
+        'z-early.txt',
+        'a-late.txt',
+    ];
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
+test('dropboxify: sort: time: desc', async (t) => {
+    const Dropbox = getDropbox();
+    
+    const {files} = await dropboxify('token', '/', {
+        sort: 'time',
+        order: 'desc',
+        Dropbox,
+    });
+    
+    const result = [];
+    
+    for (const {name} of files) {
+        result.push(name);
+    }
+    
+    const expected = [
+        'a-late.txt',
+        'z-early.txt',
+    ];
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
+test('dropboxify: sort: time: formatted time', async (t) => {
+    const Dropbox = getDropbox();
+    
+    const {files} = await dropboxify('token', '/', {
+        sort: 'time',
+        Dropbox,
+    });
+    
+    const result = [];
+    
+    for (const {time} of files) {
+        result.push(time);
+    }
+    
+    const expected = [
+        getTime('2020-01-01T08:00:00Z'),
+        getTime('2020-01-01T18:00:00Z'),
+    ];
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
+function getTime(date) {
+    return new Date(date)
+        .toTimeString()
+        .slice(0, 8);
+}
+
+function getDropbox() {
+    const entries = [{
+        '.tag': 'file',
+        'name': 'a-late.txt',
+        'size': 1,
+        'server_modified': '2020-01-01T18:00:00Z',
+    }, {
+        '.tag': 'file',
+        'name': 'z-early.txt',
+        'size': 1,
+        'server_modified': '2020-01-01T08:00:00Z',
+    }];
+    
+    const filesListFolder = stub().returns(Promise.resolve({
+        entries,
+    }));
+    
+    return function() {
+        this.filesListFolder = filesListFolder;
+    };
+}
+
+test('dropboxify: fetch: buffer', async (t) => {
+    const arrayBuffer = stub().returns('buffer');
+    const response = {
+        arrayBuffer,
+    };
+    
+    const {fetch} = globalThis;
+    
+    globalThis.fetch = stub().returns(Promise.resolve(response));
+    
+    let options;
+    
+    const Dropbox = function(a) {
+        options = a;
+        this.filesListFolder = stub().returns(Promise.resolve({
+            entries: [],
+        }));
+    };
+    
+    await dropboxify('token', '/', {
+        Dropbox,
+    });
+    
+    const result = await options.fetch('https://example.com', {});
+    
+    globalThis.fetch = fetch;
+    
+    t.equal(result.buffer, arrayBuffer);
     t.end();
 });

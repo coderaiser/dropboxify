@@ -6,13 +6,15 @@
         "date": "",
         "mode": "--- --- ---",
         "owner": "",
-        "type": "directory"
+        "type": "directory",
+        "time": ""
     }, {
         "name": "cloudcmd.png",
         "size": "11.27kb",
         "date": "23.08.2013",
         "mode": "--- --- ---",
         "owner": "",
-        "type": "file"
+        "type": "file",
+        "time": "12:08:19"
     }]
 }
