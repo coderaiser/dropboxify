@@ -41,7 +41,7 @@
     "putout": "^42.26.3",
     "superc8": "^12.7.0",
     "supertape": "^13.6.2",
-    "try-to-catch": "^3.0.0"
+    "try-to-catch": "^4.1.0"
   },
   "keywords": [
     "dropbox",
