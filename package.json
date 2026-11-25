@@ -8,7 +8,7 @@
   "homepage": "http://github.com/coderaiser/dropboxify",
   "repository": {
     "type": "git",
-    "url": "git://github.com/coderaiser/dropboxify.git"
+    "url": "git+https://github.com/coderaiser/dropboxify.git"
   },
   "scripts": {
     "test": "madrun test",

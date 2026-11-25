@@ -3,8 +3,10 @@
 const mockRequire = require('mock-require');
 
 const {test, stub} = require('supertape');
+
+const {tryToCatch} = require('try-to-catch');
 const dropboxify = require('..');
-const tryToCatch = require('try-to-catch');
+
 const {stopAll, reRequire} = mockRequire;
 
 const fixture = {
@@ -103,6 +105,7 @@ test('dropboxify: call: not root', async (t) => {
 test('dropboxify: result', async (t) => {
     const token = 'token';
     const path = '/';
+    
     const filesListFolder = stub().returns(Promise.resolve({
         entries: fixture.input,
     }));
@@ -127,6 +130,7 @@ test('dropboxify: result', async (t) => {
 test('dropboxify: result: raw', async (t) => {
     const token = 'token';
     const path = '/';
+    
     const filesListFolder = stub().returns(Promise.resolve({
         entries: fixture.input,
     }));

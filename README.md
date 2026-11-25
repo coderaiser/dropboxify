@@ -41,6 +41,7 @@ const files = await dropboxify(token, dir, {
 });
 
 console.log(files);
+
 // outputs
 ({
     path: '/',
