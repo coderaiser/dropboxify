@@ -1,3 +1,21 @@
+2026.11.25, v4.0.0
+
+feature:
+- 7f976ef dropboxify: migrate to ESM
+- cd6bf03 dropboxify: try-to-catch v4.1.0
+- 030bd50 dropboxify: supertape v13.6.2
+- 3b8f0b4 dropboxify: putout v42.26.3
+- 8ca5a8d dropboxify: nodemon v3.1.14
+- 6c6690d dropboxify: madrun v13.0.4
+- 1739638 dropboxify: eslint-plugin-putout v31.5.0
+- 5b317a1 dropboxify: eslint v10.15.0
+- f3df2ed dropboxify: dropbox v10.66.0
+- a0cdcf5 dropboxify: date-fns v4.4.0
+- ee5190e dropboxify: @types/node-fetch v2.6.13
+- e7c5235 dropboxify: @cloudcmd/sortify v3.1.0
+- 9854c21 dropboxify: @cloudcmd/formatify v3.1.0
+- 18226e1 dropboxify: superc8 v12.7.0
+
 2024.08.16, v3.0.3
 
 feature:
