@@ -33,7 +33,6 @@
   },
   "devDependencies": {
     "@types/node-fetch": "^2.5.7",
-    "c8": "^10.1.2",
     "eslint": "^9.9.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-putout": "^22.4.1",
@@ -41,6 +40,7 @@
     "mock-require": "^3.0.2",
     "nodemon": "^3.1.0",
     "putout": "^36.0.4",
+    "superc8": "^12.7.0",
     "supertape": "^10.4.0",
     "try-to-catch": "^3.0.0"
   },
